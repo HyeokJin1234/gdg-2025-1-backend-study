@@ -25,12 +25,23 @@ public class BeanTest {
         MyBean myBean1 = context.getBean(MyBean.class);
         MyBean myBean2 = context.getBean(MyBean.class);
 
-        MyBean myBean3 = new MyBean();
+        //MyBean myBean3 = new MyBean();
 
         System.out.println(myBean1);
         System.out.println(myBean2);
-        System.out.println(myBean3);
+        //System.out.println(myBean3);
 
         Assertions.assertThat(myBean1).isSameAs(myBean2);
+    }
+
+    @Test
+    public void dependencyInjection() {
+        MyBean myBean = context.getBean(MyBean.class);
+        MySubBean mySubBean = context.getBean(MySubBean.class);
+
+        System.out.println(myBean.getMySubBean());
+        System.out.println(mySubBean);
+
+        Assertions.assertThat(myBean.getMySubBean()).isSameAs(mySubBean);
     }
 }
